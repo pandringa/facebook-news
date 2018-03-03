@@ -1,0 +1,1 @@
+* * * * * root python3 /code/manage.py loadposts >> /logs/cron.log 2>&1

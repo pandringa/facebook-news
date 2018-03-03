@@ -12,13 +12,12 @@ async def fetch_url(session, url):
     async with session.get(url) as response:
       return await response.text()
 
-async def main_loader(slug, stdout):
+async def load_page(slug):
   async with aiohttp.ClientSession() as session:
     response = await fetch_url(session, 'https://graph.facebook.com/v2.12/'+slug+'?fields=fan_count%2Cid%2Cname&access_token='+FB_ACCESS_TOKEN)
     data = json.loads(response)
-    page = Page(id=data['id'],page_slug=slug,name=data['name'],likes=data['fan_count'])
+    page = Page(id=data['id'],slug=slug.lower(),name=data['name'],likes=data['fan_count'])
     page.save()
-    stdout.write('Created page: %s' % page.name)
 
 class Command(BaseCommand):
   help = 'Loads all recent posts'
@@ -28,7 +27,7 @@ class Command(BaseCommand):
 
   def handle(self, *args, **options):
     loop = asyncio.get_event_loop()
-    tasks = [main_loader(s, self.stdout) for s in options['pages']]
+    tasks = [load_page(s) for s in options['pages']]
     loop.run_until_complete(asyncio.gather(*tasks))
     loop.close()
 

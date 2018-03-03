@@ -4,13 +4,16 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+    environment:
+      - PGDATA=/data/postgres/data
     volumes:
-      - ./../psql-data:/var/lib/postgresql
+      - ./../psql-data:/data/postgres
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+      - ./logs:/logs
     ports:
       - "8000:8000"
     depends_on:
