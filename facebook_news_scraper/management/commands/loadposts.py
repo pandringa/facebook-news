@@ -92,8 +92,8 @@ class Command(BaseCommand):
     if options['pages']:
       pages = pages.filter(slug__in=options['pages']).all()
 
-    print('\n[%s] LOADING POSTS FOR %s' % (datetime.now(), [p.slug for p in pages]))
-    
+    print('\n[%s] LOADING POSTS:' % datetime.now())
+
     loop = asyncio.get_event_loop()
     
     # Step 1: Load all posts
