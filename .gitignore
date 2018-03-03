@@ -1,6 +1,8 @@
+
 config.py
 */**/config.py
 *.pyc
 */**/*.pyc
 __pycache__
 */__pycache__
+facebook_news_scraper/__pycache__/
