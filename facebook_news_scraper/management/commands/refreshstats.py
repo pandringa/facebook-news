@@ -8,6 +8,8 @@ from django.core.management.base import BaseCommand, CommandError
 from facebook_news_scraper.models import Article, Post, Page
 from facebook_news_scraper.config import FB_ACCESS_TOKEN
 
+rate_limit = asyncio.Semaphore(20)
+
 def safe_fetch(obj,*keys,default=None):
   for key in keys:
     if key in obj:
@@ -21,9 +23,10 @@ def split_chunks(l, n):
     yield l[i:i + n]
 
 async def fetch_url(session, url):
-  async with async_timeout.timeout(10):
-    async with session.get(url) as response:
-      return await response.text()
+  async with rate_limit:
+    async with async_timeout.timeout(10):
+      async with session.get(url) as response:
+        return await response.text()
 
 # Refresh stats for up to 50 posts at a time
 async def refresh_stats(by_id):
