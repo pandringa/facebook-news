@@ -1,4 +1,4 @@
-# facebook-news-analysis
+# Facebook News Analysis
 
 A set of Python scripts to archive Facebook posts from top news organizations, for use in a study of user engagement with different types of news on Facebook.
 
