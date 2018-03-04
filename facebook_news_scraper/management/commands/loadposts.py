@@ -24,11 +24,10 @@ async def fetch_url(session, url):
     async with async_timeout.timeout(10):
       async with session.get(url) as response:
         return await response.text()
-count = 0
+
 async def load_posts(page, archive=False):
   async with aiohttp.ClientSession() as session:
     url = 'https://graph.facebook.com/v2.12/'+page.id+'/posts?limit=100&fields=id,permalink_url,created_time,shares,message,link,reactions.type(LIKE).limit(0).summary(1).as(like),reactions.type(LOVE).limit(0).summary(1).as(love),reactions.type(HAHA).limit(0).summary(1).as(haha),reactions.type(WOW).limit(0).summary(1).as(wow),reactions.type(SAD).limit(0).summary(1).as(sad),reactions.type(ANGRY).limit(0).summary(1).as(angry),comments.limit(0).summary(1)&access_token='+FB_ACCESS_TOKEN
-    print('Starting batch %s', count)
     if not archive:
       latest = Post.objects.filter(page=page).order_by('-posted_at').first()
       if not latest:
