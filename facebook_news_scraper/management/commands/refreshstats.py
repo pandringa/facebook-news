@@ -43,6 +43,7 @@ async def refresh_stats(by_id):
       post.sad_count =      safe_fetch(stats,'sad','summary','total_count',default=0)
       post.comment_count =  safe_fetch(stats,'comments','summary','total_count',default=0)
       post.share_count =    safe_fetch(stats,'shares','count',default=0)
+      post.updated_at = datetime.now()
       post.save()
 
 class Command(BaseCommand):

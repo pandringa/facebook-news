@@ -32,4 +32,5 @@ class Post(models.Model):
   angry_count = models.IntegerField(null=True)
   comment_count = models.IntegerField(null=True)
   posted_at = models.DateTimeField()
+  updated_at = models.DateTimeField()
 
