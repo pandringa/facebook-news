@@ -92,7 +92,7 @@ class Command(BaseCommand):
     if options['pages']:
       pages = pages.filter(slug__in=options['pages']).all()
 
-    print('\n[%s] LOADING POSTS:' % datetime.now())
+    print('\n[%s] Loading posts...' % datetime.now())
 
     loop = asyncio.get_event_loop()
     
@@ -101,9 +101,3 @@ class Command(BaseCommand):
     loop.run_until_complete(asyncio.gather(*post_loading))
 
     loop.close()
-
-# Algorithm: 
-  # For each page -> THREADED
-    # Load posts, following pagination until we hit one already loaded
-  # For each post without likes -> THREADED
-  # For each post without comments -> THREADED

@@ -30,9 +30,3 @@ class Command(BaseCommand):
     tasks = [load_page(s) for s in options['pages']]
     loop.run_until_complete(asyncio.gather(*tasks))
     loop.close()
-
-# Algorithm: 
-  # For each page -> THREADED
-    # Load posts, following pagination until we hit one already loaded
-  # For each post without likes -> THREADED
-  # For each post without comments -> THREADED
