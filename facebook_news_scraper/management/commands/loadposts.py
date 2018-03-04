@@ -63,7 +63,7 @@ async def load_posts(page, archive=False):
           haha_count=safe_fetch(d,'haha','summary','total_count',default=0),
           sad_count=safe_fetch(d,'sad','summary','total_count',default=0),
           angry_count=safe_fetch(d,'angry','summary','total_count',default=0),
-          updated_at=datetime.now()
+          updated_at=datetime.now(timezone.utc)
         )
 
         if ('link' in d) and ('?' in d['link']):
