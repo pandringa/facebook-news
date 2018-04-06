@@ -8,7 +8,14 @@ class Page(models.Model):
 
 class Article(models.Model):
   url = models.TextField(unique=True)
+  resolved_url = models.TextField(null=True)
+  pub = models.ForeignKey(Page, on_delete=models.CASCADE)
+  pub_date = models.DateTimeField(null=True)
+  pub_headline = models.TextField(null=True)
+  pub_lede = models.TextField(null=True)
+  pub_category = models.CharField(max_length=80, null=True)
   category = models.CharField(max_length=80, null=True)
+  loaded = models.BooleanField(default=False)
   def clean(self):
     if '?' in self.url:
       self.url = self.url.split('?')[0]

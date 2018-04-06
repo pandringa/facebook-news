@@ -67,7 +67,7 @@ async def load_posts(page, archive=False):
 
         if ('link' in d) and ('?' in d['link']):
           d['link'] = d['link'].split('?')[0]
-        post.article, new_article = Article.objects.get_or_create(url=d['link'])
+        post.article, new_article = Article.objects.get_or_create(url=d['link'], pub=page)
 
         post.save()
 
