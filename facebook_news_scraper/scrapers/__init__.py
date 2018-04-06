@@ -11,6 +11,7 @@ for module in os.listdir(os.path.dirname(__file__)):
 
     __import__(import_name, globals(), locals(), ['*'])
 
-    scrapers = inspect.getmembers(sys.modules[import_name], lambda member: inspect.isclass(member) and member.__module__.startswith(__name__) and member.domain )
-
-    by_domain.update( dict([[s[1].domain,s[1]] for s in scrapers]) )
+    scrapers = inspect.getmembers(sys.modules[import_name], lambda member: inspect.isclass(member) and member.__module__.startswith(__name__) and member.domains )
+    for s in scrapers:
+      for d in s[1].domains:
+        by_domain[d] = s[1]

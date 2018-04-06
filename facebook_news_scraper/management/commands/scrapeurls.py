@@ -31,14 +31,16 @@ async def scrape(article):
     text = await response.text()
 
     if response.url.host in scrapers:
-      scraper = scrapers[response.url.host](text)
-
-      article.pub_date = scraper.get_date()
-      article.pub_headline = scraper.get_headline()
-      article.pub_lede = scraper.get_lede()
-      article.pub_keywords = scraper.get_keywords()
-      article.pub_category = scraper.get_category()
+      scraper = scrapers[response.url.host](text, response.url.host)
       article.scraped = True
+    else:
+      scraper = scrapers['generic'](text, response.url.host)
+
+    article.pub_date = scraper.get_date()
+    article.pub_headline = scraper.get_headline()
+    article.pub_lede = scraper.get_lede()
+    article.pub_keywords = scraper.get_keywords()
+    article.pub_category = scraper.get_category()
 
     article.resolved_url = response.url
     article.loaded = True
