@@ -13,6 +13,7 @@ class Article(models.Model):
   pub_date = models.DateTimeField(null=True)
   pub_headline = models.TextField(null=True)
   pub_lede = models.TextField(null=True)
+  pub_keywords = models.TextField(null=True)
   pub_category = models.CharField(max_length=80, null=True)
   category = models.CharField(max_length=80, null=True)
   loaded = models.BooleanField(default=False)
