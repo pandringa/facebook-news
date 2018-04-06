@@ -17,6 +17,7 @@ class Article(models.Model):
   pub_category = models.CharField(max_length=80, null=True)
   category = models.CharField(max_length=80, null=True)
   loaded = models.BooleanField(default=False)
+  scraped = models.BooleanField(default=False)
   def clean(self):
     if '?' in self.url:
       self.url = self.url.split('?')[0]
