@@ -31,7 +31,7 @@ async def scrape(article):
     text = await response.text()
 
     if response.url.host in scrapers:
-      scraper = scrapers[response.url.host](text, response.url.host)
+      scraper = scrapers[response.url.host](text, response.url)
       article.scraped = True
     else:
       scraper = scrapers['generic'](text, response.url.host)

@@ -4,7 +4,7 @@ class NYTimesScraper(Scraper):
   domains = ["www.nytimes.com", "cooking.nytimes.com"]
 
   def get_category(self):
-    if self.domain == 'cooking.nytimes.com':
+    if self.url.host == 'cooking.nytimes.com':
       return 'Recipes'
     else:
       return super(NYTimesScraper, self).get_category()

@@ -39,13 +39,7 @@ class ReutersScraper(Scraper):
 
   def get_keywords(self):
     keywords = super(ReutersScraper, self).get_keywords()
-    if not keywords:
-      tags = self.html.cssselect('meta[property="og:article:tag"]')
-      if tags:
-        keywords = tags[0].get('content')
-
-    if keywords:
-      if ';' in keywords:
-        return ','.join(keywords.split(';'))
-      else:
-        return keywords 
+    
+    if keywords and ';' in keywords:
+      return ','.join(keywords.split(';'))
+    return keywords 
