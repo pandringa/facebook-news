@@ -1,4 +1,5 @@
-from .base import Scraper
+from .base import Scraper, tzs
+from dateutil.parser import parse as parse_date
 
 class NYTimesScraper(Scraper):
   domains = ["www.nytimes.com", "cooking.nytimes.com"]
@@ -12,6 +13,14 @@ class NYTimesScraper(Scraper):
   def get_date(self):
     article_published = self.html.cssselect('head meta[property="article:published"]')
     if not article_published:
+      article_published = self.html.cssselect('head meta[name="ptime"]')
+    if not article_published:
       article_published = self.html.cssselect('head meta[name="pdate"]')
 
-    if article_published: return article_published[0].get('content')
+    if article_published: 
+      date = parse_date(article_published[0].get('content'), tzinfos=tzs)
+      if not date.tzinfo:
+        date = date.replace(tzinfo=tzs['ET'])
+      return date
+    else:
+      return super(NYTimesScraper, self).get_date()

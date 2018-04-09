@@ -1,4 +1,4 @@
-from .base import JsonScraper
+from .base import JsonScraper, tzs
 import re
 from dateutil.parser import parse as parse_date
 
@@ -24,7 +24,11 @@ class WashingtonPostScraper(JsonScraper):
     if not date:
       date = self.html.cssselect('[itemprop="datePublished"]')
       if date and date[0].get('content'):
-        return parse_date(date[0].get('content'))
+        try:
+          py_date = parse_date(date[0].get('content'), tzinfos=tzs)
+          return py_date
+        except:
+          print("Error parsing date in WashingtonPostScraper: %s (url: %s)" % (date[0].get('content'), self.url))
     else:
       return date
 

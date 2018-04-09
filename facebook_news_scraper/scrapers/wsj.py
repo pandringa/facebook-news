@@ -1,9 +1,11 @@
 from .base import Scraper
 
 class WSJScraper(Scraper):
-  domains = ["www.wsj.com"]
+  domains = ["www.wsj.com", "partners.wsj.com"]
 
   def get_category(self):
+    if self.url.host == 'partners.wsj.com':
+      return 'Advertisement'
     article_section = self.html.cssselect('head meta[name="article.section"]')
     
     if article_section: 
@@ -14,12 +16,11 @@ class WSJScraper(Scraper):
   def get_date(self):
     article_published = self.html.cssselect('head meta[name="article.published"]')
     if not article_published:
-      article_published = self.html.cssselect('head meta[itemprop="datePublished"]')
-
+      article_published = self.html.cssselect('[itemprop="datePublished"]')
     if article_published: 
       return article_published[0].get('content')
-    else:
-      return super(WSJScraper, self).get_date()
+
+    return super(WSJScraper, self).get_date()
 
   def get_headline(self):
     article_headline = self.html.cssselect('head meta[name="article.headline"]')

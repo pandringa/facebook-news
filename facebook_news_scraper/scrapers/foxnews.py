@@ -1,7 +1,7 @@
 from .base import JsonScraper
 
 class FoxNewsScraper(JsonScraper):
-  domains = ["www.foxnews.com", "www.foxbusiness.com", "http://insider.foxnews.com"]
+  domains = ["www.foxnews.com", "www.foxbusiness.com", "insider.foxnews.com"]
 
   def get_category(self):
     result = ""

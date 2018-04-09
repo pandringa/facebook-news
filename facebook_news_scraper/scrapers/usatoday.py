@@ -2,11 +2,13 @@ import json
 from .base import JsonScraper
 
 class USATodayScraper(JsonScraper):
-  domains = ["www.usatoday.com"]
+  domains = ["www.usatoday.com", "ftw.usatoday.com"]
 
   def get_category(self):
-    if self.json_metadata and 'keywords' in self.json_metadata:
-        return self.json_metadata['keywords'][0]
+    if self.url.host == 'ftw.usatoday.com':
+      return 'Sports'
+    if self.json_metadata and 'keywords' in self.json_metadata and 'Section:' in self.json_metadata['keywords'][0]:
+      return self.json_metadata['keywords'][0]
     return super(USATodayScraper, self).get_category()
 
   def get_keywords(self):
