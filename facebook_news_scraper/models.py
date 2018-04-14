@@ -6,6 +6,13 @@ class Page(models.Model):
   slug = models.CharField(max_length=60, unique=True)
   likes = models.IntegerField()
 
+  @classmethod
+  def csv_headers(cls):
+    return ['id', 'name', 'slug', 'likes']
+
+  def as_csv(self):
+    return [self.id, self.name, self.slug, self.likes]
+
 class Article(models.Model):
   url = models.TextField(unique=True)
   resolved_url = models.TextField(null=True)
@@ -54,4 +61,37 @@ class Post(models.Model):
   comment_count = models.IntegerField(null=True)
   posted_at = models.DateTimeField()
   updated_at = models.DateTimeField()
+
+  @classmethod
+  def csv_headers(cls):
+    return [
+      'page', 
+      'fb_id',
+      'share_count', 
+      'like_count', 
+      'wow_count', 
+      'haha_count',
+      'sad_count', 
+      'angry_count', 
+      'comment_count',
+      'date',
+      'url',
+      'category',
+    ]
+
+  def as_csv(self):
+    return [
+      self.page.slug,
+      self.id,
+      self.share_count,
+      self.like_count,
+      self.wow_count,
+      self.haha_count,
+      self.sad_count,
+      self.angry_count,
+      self.comment_count,
+      self.posted_at,
+      self.article.resolved_url,
+      self.article.category
+    ]
 
