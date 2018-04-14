@@ -83,7 +83,9 @@ class NPRScraper(Scraper):
   @classmethod
   def categorize(cls, a):
     if a.pub_category:
-      if 'The Two-Way' in a.pub_category:
+      if '13.7: Cosmos And Culture' in a.pub_category:
+        return 'science'
+      elif 'The Two-Way' in a.pub_category:
         category = re.match('The Two-Way\s?-?([\d\w\s:&\.]+)?', a.pub_category)
       else:  
         category = re.match('([\d\w\s:&\']+)-?([\d\w\s:&\.\']+)?', a.pub_category)
