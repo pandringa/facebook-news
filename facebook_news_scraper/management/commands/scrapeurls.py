@@ -62,6 +62,20 @@ async def scrape(article):
       print(e)
       return
 
+
+    try:
+      if response.url.host in scrapers:
+        category = scrapers[response.url.host].categorize(article)
+      else:
+        category = scrapers['generic'].categorize(article)
+      if category:
+        article.category = category
+    except Exception as e:
+      print("Error categorizing article id %i url: %s" % (article.id, article.url))
+      errors.append("%i categorizing: %s" % (article.id, e))
+      print(e)
+      return
+
     try:
       article.save()
     except Exception as e:
@@ -69,6 +83,7 @@ async def scrape(article):
       errors.append("%i saving: %s" % (article.id, e))
       print(e)
       return
+
 
     global current_count
     global total_count
@@ -111,7 +126,7 @@ class Command(BaseCommand):
     loop.run_until_complete(asyncio.gather(*article_scraping))
     loop.close()
 
-    with open("logs/scrape.txt", "w") as text_file:
-      text_file.write("\n".join(errors))
+    # with open("logs/scrape.txt", "w") as text_file:
+    #   text_file.write("\n".join(errors))
 
     print("Finished scraping %i Articles. Wrote %i errors to logs/scrape.txt" % (total_articles, len(errors)))
