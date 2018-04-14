@@ -26,7 +26,7 @@ SECRET_KEY = '8e=9%qa7_+3sa#=o_wi32dzwo8g+3uf=8d_qgg%yur6&4ysbm='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.peterandringa.com']
 
 
 # Application definition
