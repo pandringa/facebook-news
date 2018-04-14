@@ -26,6 +26,18 @@ class Article(models.Model):
     self.clean()
     return super().save(*args, **kwargs)
 
+  Categories = [
+    "lifestyle",
+    "national",
+    "politics",
+    "business",
+    "science",
+    "opinion",
+    "sports",
+    "world",
+    "local",
+  ]
+
 class Post(models.Model):
   id = models.CharField(max_length=60, primary_key=True, unique=True)
   page = models.ForeignKey(Page, on_delete=models.CASCADE)

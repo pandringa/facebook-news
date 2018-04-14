@@ -3,6 +3,9 @@ from html import unescape
 from lxml.html import fromstring
 from dateutil.parser import parse as parse_date
 from dateutil.tz import gettz
+from facebook_news_scraper.models import Article
+
+from .categories import category_map as global_category_map
 
 tzs = {
   "ET": gettz("America/New York"),
@@ -69,6 +72,45 @@ class Scraper:
       keywords = self.html.cssselect('meta[property="og:article:tag"]')
 
     if keywords: return keywords[0].get('content')
+
+  @classmethod
+  def try_guesses(cls, words):
+    guesses = []
+    for word in words.lower().split(','):
+      guess = cls.categorize(word)
+      if guess:
+        guesses.append(guess)
+    # If all guesses point to the same category, go with it
+    if len(guesses) > 0 and guesses.count(guesses[0]) == len(guesses):
+      return guesses[0]
+
+  @classmethod
+  def categorize(cls, a):
+    real_category = a
+    if isinstance(a, Article) and a.pub_category:
+      real_category = a.pub_category
+
+    if isinstance(real_category, str):
+      if hasattr(cls, 'category_map') and real_category.lower().strip() in cls.category_map:
+        real_category = cls.category_map[real_category.lower().strip()]  
+      elif real_category.lower().strip() in global_category_map:
+        real_category = global_category_map[real_category.lower().strip()]
+
+      if real_category.lower().strip() in [a.lower() for a in Article.Categories]:
+        return real_category.lower()
+
+    # After attempting categories, now try keyword strings
+    if isinstance(a, Article) and a.pub_keywords:
+      keywords_category = False
+      only_one = True
+      for category in Article.Categories:
+        if category in a.pub_keywords:
+          if not keywords_category:
+            keywords_category = category
+          else:
+            only_one = False
+      if keywords_category and only_one:
+        return keywords_category
 
 class JsonScraper(Scraper):
   domains = ['generic']

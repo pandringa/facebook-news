@@ -1,7 +1,15 @@
 from .base import Scraper
+import re
 
 class ReutersScraper(Scraper):
   domains = ["www.reuters.com"]
+  # category_map = {
+  #   'tech': 'business',
+  #   'life': 'lifestyle',
+  #   'technology': 'business',
+  #   'markets': 'business',
+  #   'us': 'national'
+  # }
 
   def get_category(self):
     article_section = self.html.cssselect('meta[name="DCSext.DartZone"]')
@@ -43,3 +51,12 @@ class ReutersScraper(Scraper):
     if keywords and ';' in keywords:
       return ','.join(keywords.split(';'))
     return keywords 
+
+  @classmethod
+  def categorize(cls, a):
+    if a.pub_category:
+      reuters_category = re.match('us.reuters/(\w+)/.*', a.pub_category)
+      if reuters_category:
+        return super(ReutersScraper, cls).categorize(reuters_category.group(1).lower())
+      return super(ReutersScraper, cls).categorize(a)
+

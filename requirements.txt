@@ -4,3 +4,7 @@ aiohttp==3.1.2
 lxml
 cssselect
 py-dateutil
+scikit-learn
+numpy
+scipy
+nltk

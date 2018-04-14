@@ -7,6 +7,8 @@ class NYTimesScraper(Scraper):
   def get_category(self):
     if self.url.host == 'cooking.nytimes.com':
       return 'Recipes'
+    elif '/watching/' in self.url.path:
+      return 'Watching'
     else:
       return super(NYTimesScraper, self).get_category()
 
@@ -24,3 +26,11 @@ class NYTimesScraper(Scraper):
       return date
     else:
       return super(NYTimesScraper, self).get_date()
+
+  @classmethod
+  def categorize(cls, a):
+    cat = a.pub_category
+    if cat:
+      cat = cat.replace('.', '').lower().strip()
+      return super(NYTimesScraper, cls).categorize(cat)
+    return super(NYTimesScraper, cls).categorize(a)

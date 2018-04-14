@@ -4,6 +4,11 @@ import re
 
 class CNNScraper(JsonScraper):
   domains = ["www.cnn.com", "money.cnn.com", "edition.cnn.com"]
+  category_map = {
+    'pf': 'lifestyle', # Personal Finance
+    'cnnmoney': 'business'
+  }
+
 
   def get_category(self):
     # Attempt to pull result from meta tags
@@ -52,3 +57,18 @@ class CNNScraper(JsonScraper):
       date_timezone = tzs["ET"]
     if date:
       return date.replace(tzinfo=date_timezone)
+
+  @classmethod
+  def categorize(cls, a):
+    if a.pub_category:        
+      cat_match = re.match('([\d\w\s:&\']+)-?([\d\w\s:&\.\']+)?', a.pub_category)
+      if cat_match and cat_match.group(1):
+        category = cat_match.group(1).lower().strip()
+        if category == 'news' and cat_match.group(2):
+          category = cat_match.group(2).lower().strip()
+        
+        return super(CNNScraper, cls).categorize(category)
+      
+    return super(CNNScraper, cls).categorize(a)
+
+

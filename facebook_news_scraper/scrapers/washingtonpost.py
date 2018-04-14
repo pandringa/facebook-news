@@ -4,6 +4,37 @@ from dateutil.parser import parse as parse_date
 
 class WashingtonPostScraper(JsonScraper):
   domains = ["www.washingtonpost.com"]
+  category_map = {
+    'the fix': 'politics',
+    'post nation': 'national',
+    'post politics': 'politics',
+    'worldviews': 'world',
+    'animalia': 'science',
+    'speaking of science': 'science',
+    'blogs': 'opinion',
+    'powerpost': 'politics',
+    'goingoutguide': 'lifestyle',
+    'going out guide': 'lifestyle',
+    'acts of faith': 'lifestyle',
+    'capital weather gang': 'local',
+    'early lead': 'sports',
+    'fact checker': 'politics',
+    'global opinions': 'opinion',
+    'solo-ish': 'lifestyle',
+    'to your health': 'lifestyle',
+    'true crime': 'national',
+    'outlook': 'opinion',
+    'answer sheet': 'national',
+    'comic riffs': 'lifestyle',
+    'd.c. sports blog': 'lifestyle',
+    'democracypost': 'opinion',
+    'grade point': 'national',
+    'gridlock': 'national',
+    'made by history': 'opinion',
+    'checkpoint': 'national',
+    'on parenting': 'lifestyle',
+    'reliable source': 'lifestyle',
+  }
 
   def get_category(self):
     result = ""
@@ -32,3 +63,16 @@ class WashingtonPostScraper(JsonScraper):
     else:
       return date
 
+
+  @classmethod
+  def categorize(cls, a):
+    if a.pub_category:
+      category = re.match('([\w\s]+)\s*-\s*([\w\s]+)?', a.pub_category)
+      if category:
+        if category.group(1).strip() == 'news' and category.group(2):
+          category = category.group(2).lower().strip()
+        else:
+          category = category.group(1).lower().strip()
+        return super(WashingtonPostScraper, cls).categorize(category)
+      
+      return super(WashingtonPostScraper, cls).categorize(a)
