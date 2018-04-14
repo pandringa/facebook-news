@@ -43,5 +43,10 @@ def get_posts(request):
   if request.GET.get('to'):
     posts = posts.filter(posted_at__lte=parse_date(request.GET.get('to')))
   posts = posts.order_by('posted_at')
-  return CsvResponse(Post, posts, fields=request.GET.get('fields').split(','))
+
+  fields = None # Default to all fields
+  if request.GET.get('fields'):
+    fields = request.Get.get('fields').split(',')
+
+  return CsvResponse(Post, posts, fields=fields)
 
