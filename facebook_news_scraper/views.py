@@ -35,7 +35,7 @@ def get_pages(request):
 
 # GET api/posts
 def get_posts(request):
-  posts = Post.objects.exclude(page_id__in=EXCLUDE_PAGES, article__category__isnull=True)
+  posts = Post.objects.exclude(page_id__in=EXCLUDE_PAGES).exclude(article__category__isnull=True)
   if request.GET.get('page'):
     posts = posts.filter(page__slug__in=request.GET.get('page').split(','))
   if request.GET.get('from'):
