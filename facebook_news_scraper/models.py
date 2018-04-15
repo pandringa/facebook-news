@@ -69,6 +69,7 @@ class Post(models.Model):
       'fb_id',
       'share_count', 
       'like_count', 
+      'love_count',
       'wow_count', 
       'haha_count',
       'sad_count', 
