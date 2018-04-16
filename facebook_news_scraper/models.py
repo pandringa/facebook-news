@@ -86,6 +86,7 @@ class Post(models.Model):
       self.id,
       self.share_count,
       self.like_count,
+      self.love_count,
       self.wow_count,
       self.haha_count,
       self.sad_count,
