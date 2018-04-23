@@ -65,7 +65,7 @@ def top_posts(request):
     val = Post.objects.aggregate(Max(r+'_count'))[r+'_count__max']
     posts.append( Post.objects.get(**{r+'_count': val}) )
   context = {
-    'main_domain': 'http://localhost:8000',
+    'main_domain': 'https://peterandringa.com/facebook-news-analysis',
     'reactions': reactions,
     'posts': zip(reactions, posts),
     'width': int(request.GET.get('initialWidth') or 750) - 100
