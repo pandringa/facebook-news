@@ -1,0 +1,39 @@
+/* FONTS */
+body {
+  font-family: "Libre Baskerville", "Georgia", serif;
+}
+h1, h2, h3 {
+  font-family: "Libre Franklin", "Helvetica", sans-serif;
+}
+h1 {
+  font-size: 2.5rem;
+}
+article {
+  line-height: 2;
+  font-size: 17px;
+}
+
+/* General Styles */
+.container {
+  display: block;
+  max-width: 800px;
+  margin: 3em auto;
+}
+article {
+  max-width: 750px;
+  margin: auto;
+}
+.byline {
+  padding-left: 25px;
+  width: 200px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+  font-weight: 300;
+}
+.interactive {
+  min-height: 400px;
+  margin: 2em auto;
+}
+.interactive iframe {
+  min-height: 400px;
+}

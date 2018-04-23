@@ -3,10 +3,12 @@ from dateutil.parser import parse as parse_date
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from .models import Page, Post, Article
-from django.db.models import Model
+from django.db.models import Model, Max
 
 # Exclude MSNBC, CNBC, BBC News, Buzzfeed, The Guardian
 EXCLUDE_PAGES = ['273864989376427', '97212224368', '228735667216', '21898300328', '10513336322']
+
+
 
 class CsvResponse(HttpResponse):
   def __init__(self, cls, data, fields=None):
@@ -53,4 +55,22 @@ def get_posts(request):
     fields = request.Get.get('fields').split(',')
 
   return CsvResponse(Post, posts, fields=fields)
+
+
+# GET interactives/top_posts
+def top_posts(request):
+  reactions = ['like','love','haha','wow','sad','angry', 'comment', 'share']
+  posts = []
+  for r in reactions:
+    val = Post.objects.aggregate(Max(r+'_count'))[r+'_count__max']
+    posts.append( Post.objects.get(**{r+'_count': val}) )
+  context = {
+    'main_domain': 'http://localhost:8000',
+    'reactions': reactions,
+    'posts': zip(reactions, posts),
+    'width': int(request.GET.get('initialWidth') or 750) - 100
+  }
+  response = render(request, "top_posts.html", context)
+  response['X-Frame-Options'] = 'ALLOW-FROM https://peterandringa.com/'
+  return response
 
