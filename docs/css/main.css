@@ -31,9 +31,47 @@ article {
   font-weight: 300;
 }
 .interactive {
-  min-height: 400px;
-  margin: 2em auto;
+  font-family: "Montserrat";
+  margin: 2em -6em;
 }
 .interactive iframe {
   min-height: 400px;
+}
+
+#reaction-bars .barset {
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+#reaction-selects {
+  margin-bottom: 10px;
+  text-align: right;
+}
+#reaction-selects .dropdown {
+  display: inline-block;
+}
+
+#bars-container {
+  clear: both;
+}
+
+.dropdown {
+  border-radius: 10px;
+  text-align: left;
+  outline: none;
+  margin-left: 0.5em;
+}
+.dropdown .selectivity-single-select {
+  padding: 0.3em 0.5em;
+}
+.dropdown .selectivity-single-result-container {
+  transform: translate(0.3em, -0.5em);
+}
+.dropdown .selectivity-single-selected-item-remove {
+  transform: translate(-0.75em, 0.5em);
+}
+.dropdown .selectivity-caret {
+  right: 0.75em;
+  top: 0.6em;
 }

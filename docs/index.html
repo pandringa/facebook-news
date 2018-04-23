@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>Exploring Facebook's News Landscape</title>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Libre+Franklin:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Libre+Franklin:700|Montserrat:300,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/selectivity.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -39,7 +41,8 @@
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
         <!-- Interactive 2: Graphs of engagement by news org, category -->
-        <div class="interactive"></div>
+        <div class="interactive">
+        </div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -50,7 +53,17 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.</p>
 
-        <!-- Interactive 3: Pie Charts of most-posed categories -->
+        <!-- Interactive 3: Reaction bars -->
+        <div class="interactive" id="reaction-bars">
+            <div id="reaction-selects"></div>
+            <div id="bars-container"></div>
+        </div>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.</p>
+
+
+        <!-- Interactive 4: Pie Charts of most-posed categories -->
         <div class="interactive"></div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -84,9 +97,8 @@
 
     <!-- JS Dependences -->
     <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
-    <script>
-        const API_URL = 'http://localhost:8080'
-        var pymParent = new pym.Parent('top_posts', API_URL+'/interactives/top_posts', {});
-    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="js/selectivity.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
