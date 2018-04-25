@@ -17,9 +17,7 @@ function buildReactionBars(data){
   
   page_select.onChange(e => {
     category_bars.forEach(b => {
-      console.log('updating', b.title)
       const newData = data.filter(d => b.title == d.category && (!e.value || d.page == e.value) )
-      console.log(newData)
       b.update( newData )
     })
   });
