@@ -39,7 +39,7 @@ class ReactionBars {
 
   update(dataset){
     const data = this._transformData(dataset)
-
+    console.log(data)
     const bar_x = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.count)]).nice()
       .range([0, this.width - this.text_width])
