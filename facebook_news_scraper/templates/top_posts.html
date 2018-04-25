@@ -25,7 +25,7 @@
   {% for reaction, post in posts %}
     <div class="post {% if forloop.first %} current {%endif%}" data-reaction={{reaction}}>
       <div class='post-headline'>
-        <h1>Top {{ reaction | get_headline }} Article</h1> 
+        <h2>Top {{ reaction | get_headline }} Article</h2> 
         <span class="count">
           <img src="{{ main_domain }}/img/reactions/{{ reaction }}.png" alt="{{reaction}}">
           {{ post|get_count:reaction }}

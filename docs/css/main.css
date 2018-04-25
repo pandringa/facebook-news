@@ -16,7 +16,7 @@ article {
 /* General Styles */
 .container {
   display: block;
-  max-width: 800px;
+  max-width: 700px;
   margin: 3em auto;
 }
 article {
@@ -32,6 +32,7 @@ article {
 }
 .interactive {
   font-family: "Montserrat";
+  font-weight: 500;
   margin: 2em -6em;
 }
 .interactive iframe {
@@ -74,4 +75,65 @@ article {
 .dropdown .selectivity-caret {
   right: 0.75em;
   top: 0.6em;
+}
+.dropdown .dropdown-icon {
+  width: 1.1em;
+  height: 1.1em;
+  display: inline;
+  transform: translateY(0.1em);
+}
+
+#pies-legend .legend-item {
+  display: inline-block;
+  margin: 11px;
+  font-weight: bold;
+}
+
+#pies-legend .legend-color {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+#reaction-table h2 {
+  margin-bottom: 0;
+}
+#reaction-table table {
+  border-spacing: 0.2em 1em;
+}
+#reaction-table tr {
+  position: relative;
+  z-index: 3;
+}
+#reaction-table th {
+  font-weight: normal;
+}
+#reaction-table td {
+  font-weight: bold;
+  color: white;
+  padding: 0.25em;
+  text-align: center;
+}
+#reaction-table th img {
+  width: 2em;
+  height: 2em;
+}
+#reaction-table tr:not(.header) th{
+  font-size: 0.8em;
+  text-align: right;
+  padding-right: 0.5em;
+}
+#reaction-table tr:not(.header):hover th {
+  font-weight: bold;
+}
+
+
+#correlations-select {
+  margin-bottom: 10px;
+  text-align: right;
+}
+#correlations-select .dropdown {
+  display: inline-block;
 }

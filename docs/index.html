@@ -64,13 +64,21 @@
 
 
         <!-- Interactive 4: Pie Charts of most-posed categories -->
-        <div class="interactive"></div>
+        
+        <div class="interactive" id="category-pies">
+            <h2>Most-Posted Categories</h2>
+            <div id="pies-container"></div>
+            <div id="pies-legend"></div>
+        </div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.</p>
 
         <!-- Interactive 5: Table with most-posted, most-reacted, most-commented categories -->
-        <div class="interactive"></div>
+        <div class="interactive" id="reaction-table">
+            <h2>Most Common Categories</h2>
+            <div id="table-container"></div>
+        </div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -82,7 +90,10 @@
         tempor incididunt ut labore et dolore magna aliqua.</p>
 
         <!-- Interactive 6: Correlations between reactions and shares -->
-        <div class="interactive"></div>
+        <div class="interactive" id="correlations-graph">
+            <div id="correlations-select"></div>
+            <div id="correlations-container"></div>
+        </div>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -96,6 +107,7 @@
     </section>
 
     <!-- JS Dependences -->
+    <script type="text/javascript" src="js/regressions.js"></script>
     <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="js/selectivity.min.js"></script>
