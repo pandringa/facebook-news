@@ -56,7 +56,7 @@ class ReactionBars {
           .attr('y', d => bar_y(d.name) + 2)
           .attr('width', this.height/8)
           .attr('height', this.height/8)
-          .attr("xlink:href", d => "https://peterandringa.com/facebook-news-analysis/img/reactions/"+d.name+".png")
+          .attr("xlink:href", d => "https://peterandringa.com/facebook-news/img/reactions/"+d.name+".png")
     
     const bars = this.bar_group.selectAll('rect')
       .data(data, d => d.name)

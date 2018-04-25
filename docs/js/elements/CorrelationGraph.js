@@ -123,7 +123,7 @@ class CorrelationGraph {
       .attr('width', 20)
       .attr('height', 20)
       .attr('transform', 'translate(1,-17)')
-      .attr("xlink:href", d => "https://peterandringa.com/facebook-news-analysis/img/reactions/"+d.reaction+".png")
+      .attr("xlink:href", d => "https://peterandringa.com/facebook-news/img/reactions/"+d.reaction+".png")
 
     new_group
       .transition()
@@ -174,7 +174,7 @@ class CorrelationGraph {
       .attr('y', (d,i) => i*20 + this.margin.top + 6)
       .attr('width', 12)
       .attr('height', 12)
-      .attr("xlink:href",d => "https://peterandringa.com/facebook-news-analysis/img/reactions/"+d.reaction+".png")
+      .attr("xlink:href",d => "https://peterandringa.com/facebook-news/img/reactions/"+d.reaction+".png")
 
     new_info
       .append("text")

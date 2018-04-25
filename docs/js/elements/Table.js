@@ -6,7 +6,7 @@ class Table{
     header_el.selectAll('th:not(.empty)').data(headers)
       .enter().append('th')
         .append('img')
-          .attr("src", d => "https://peterandringa.com/facebook-news-analysis/img/reactions/"+d+".png")
+          .attr("src", d => "https://peterandringa.com/facebook-news/img/reactions/"+d+".png")
 
 
     for(var row of Object.keys(dataset)){

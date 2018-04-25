@@ -1,9 +1,11 @@
 import csv
 from dateutil.parser import parse as parse_date
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from .models import Page, Post, Article
 from django.db.models import Model, Max
+from django.db import connection
+from .sql_query import query as query_all_posts
 
 # Exclude MSNBC, CNBC, BBC News, Buzzfeed, The Guardian
 EXCLUDE_PAGES = ['273864989376427', '97212224368', '228735667216', '21898300328', '10513336322']
@@ -57,6 +59,27 @@ def get_posts(request):
   return CsvResponse(Post, posts, fields=fields)
 
 
+# SQL version of GET api/posts
+def get_all_posts(request):
+  with connection.cursor() as cursor:
+    def response_generator(columns, cursor):
+      yield ",".join(columns)
+      while True:
+        row = cursor.fetchone()
+        print(row)
+        if not row:
+          break
+        else:
+          yield ",".join(row)
+
+    cursor.execute(query_all_posts)
+    columns = [col[0] for col in cursor.description]
+
+    return StreamingHttpResponse( 
+      response_generator(columns, cursor), 
+      content_type='text/csv'
+    )
+    
 # GET interactives/top_posts
 def top_posts(request):
   reactions = ['like','love','haha','wow','sad','angry', 'comment', 'share']
@@ -65,7 +88,7 @@ def top_posts(request):
     val = Post.objects.aggregate(Max(r+'_count'))[r+'_count__max']
     posts.append( Post.objects.get(**{r+'_count': val}) )
   context = {
-    'main_domain': 'https://peterandringa.com/facebook-news-analysis',
+    'main_domain': 'https://peterandringa.com/facebook-news',
     'reactions': reactions,
     'posts': zip(reactions, posts),
     'width': int(request.GET.get('initialWidth') or 750) - 100

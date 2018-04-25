@@ -127,7 +127,7 @@ function buildCorrelationGraph(data){
   
   const reaction_image_map = graph.reactions.reduce( (obj, r) => {
     obj[r] = `
-      <img class='dropdown-icon' alt='${r}' src='https://peterandringa.com/facebook-news-analysis/img/reactions/${r}.png'/>
+      <img class='dropdown-icon' alt='${r}' src='https://peterandringa.com/facebook-news/img/reactions/${r}.png'/>
       - <span style="color:${REACTION_COLORS[r]}">${r}</span>
     `
     return obj
