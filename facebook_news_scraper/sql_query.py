@@ -1,4 +1,4 @@
-query = '''
+all_posts_query = '''
   SELECT "facebook_news_scraper_post"."id" AS fb_id,
   "facebook_news_scraper_page"."slug" AS page,
   "facebook_news_scraper_post"."share_count" AS share_count,
@@ -23,4 +23,19 @@ query = '''
   AND NOT ("facebook_news_scraper_article"."category" IS NULL)
   AND NOT ("facebook_news_scraper_article"."category" = 'local'
   AND "facebook_news_scraper_article"."category" IS NOT NULL))
+  AND "facebook_news_scraper_post"."posted_at" >= '2018-03-01 00:00:00+00:00'
+  ORDER BY date ASC
 '''
+
+def stream_csv(columns, cursor):
+  yield ",".join(columns)+"\n"
+  while True:
+    row = cursor.fetchone()
+    if row:
+      yield ",".join([str(r) for r in row])+"\n"
+    else:
+      break
+  cursor.close()
+
+
+march_april_query = all_posts_query + '''AND "facebook_news_scraper_post"."posted_at" <= '2018-05-01 00:00:00+00:00')'''

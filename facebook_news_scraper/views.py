@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, render_to_resp
 from .models import Page, Post, Article
 from django.db.models import Model, Max
 from django.db import connection
-from .sql_query import query as query_all_posts
+from .sql_query import all_posts_query, stream_csv
 
 # Exclude MSNBC, CNBC, BBC News, Buzzfeed, The Guardian
 EXCLUDE_PAGES = ['273864989376427', '97212224368', '228735667216', '21898300328', '10513336322']
@@ -56,29 +56,27 @@ def get_posts(request):
   if request.GET.get('fields'):
     fields = request.Get.get('fields').split(',')
 
-  return CsvResponse(Post, posts, fields=fields)
+  print(posts.query)
 
+  return CsvResponse(Post, posts, fields=fields)
 
 # SQL version of GET api/posts
 def get_all_posts(request):
-  with connection.cursor() as cursor:
-    def response_generator(columns, cursor):
-      yield ",".join(columns)
-      while True:
-        row = cursor.fetchone()
-        print(row)
-        if not row:
-          break
-        else:
-          yield ",".join(row)
+  cursor =  connection.cursor()
+  cursor.execute(all_posts_query)
+  columns = [col[0] for col in cursor.description]
 
-    cursor.execute(query_all_posts)
-    columns = [col[0] for col in cursor.description]
-
-    return StreamingHttpResponse( 
-      response_generator(columns, cursor), 
-      content_type='text/csv'
-    )
+  return StreamingHttpResponse( 
+    stream_csv(columns, cursor), 
+    content_type='text/csv'
+  )
+  
+  # return HttpResponse(
+  #   ",".join(columns) + "\n" + "\n".join([
+  #     ",".join([str(r) for r in row])
+  #   for row in cursor.fetchall()]),
+  #   content_type='text/csv'
+  # )
     
 # GET interactives/top_posts
 def top_posts(request):
