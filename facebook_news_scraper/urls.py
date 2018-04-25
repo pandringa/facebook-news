@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('api/pages', views.get_pages, name="api_get_pages"),
+    path('api/posts/all', views.get_all_posts, name="api_get_all_posts"),
     path('api/posts', views.get_posts, name="api_get_posts"),
     path('interactives/top_posts', views.top_posts, name="interactive_top_posts")
 ]
