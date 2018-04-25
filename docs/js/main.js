@@ -213,7 +213,7 @@ function buildBarGraphs(data, page_data){
 /* LOAD DATA
 **************************/
 function loadData(){
-  return d3.csv("https://mj583.peterandringa.com/api/posts?from=2018-3-1&to=2018-3-15")
+  return d3.csv("https://peterandringa.com/facebook-news-analysis/data/posts.csv")
     .then(data => {
       return data.map(d => {
         d.like_count = +d.like_count
