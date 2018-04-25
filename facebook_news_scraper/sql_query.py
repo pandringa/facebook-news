@@ -24,7 +24,6 @@ all_posts_query = '''
   AND NOT ("facebook_news_scraper_article"."category" = 'local'
   AND "facebook_news_scraper_article"."category" IS NOT NULL))
   AND "facebook_news_scraper_post"."posted_at" >= '2018-03-01 00:00:00+00:00'
-  ORDER BY date ASC
 '''
 
 def stream_csv(columns, cursor):
@@ -38,4 +37,6 @@ def stream_csv(columns, cursor):
   cursor.close()
 
 
-march_april_query = all_posts_query + '''AND "facebook_news_scraper_post"."posted_at" <= '2018-05-01 00:00:00+00:00')'''
+march_april_query = all_posts_query + '''
+  AND "facebook_news_scraper_post"."posted_at" <= '2018-05-01 00:00:00+00:00'
+'''

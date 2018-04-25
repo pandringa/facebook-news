@@ -213,8 +213,9 @@ function buildBarGraphs(data, page_data){
 /* LOAD DATA
 **************************/
 function loadData(){
-  return d3.csv("data/posts.csv")
+  return d3.csv("https://mj583.peterandringa.com/api/posts/all")
     .then(data => {
+      console.log(`Loaded ${data.length} rows of CSV`)
       return data.map(d => {
         d.like_count = +d.like_count
         d.love_count = +d.love_count

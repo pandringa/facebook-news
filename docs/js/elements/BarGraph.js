@@ -108,7 +108,7 @@ class BarGraph{
     const labelSvg = d3.select(svgDom)
       .attr('width', 150)
       .attr('height', this.height)
-      .attr('viewBox', '0,0,150'+this.height)
+      .attr('viewBox', '0,0,150,'+this.height)
 
     labelSvg.append('g')
       .style('transform', 'translateX(150px)')
