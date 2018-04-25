@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Exploring Facebook's News Landscape</title>
-    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Libre+Franklin:700|Montserrat:300,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville"Libre+Franklin:700"Montserrat:300,500" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/selectivity.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -9,59 +9,58 @@
   <body>
     <section class="container">
       <h1 class="headline">Exploring Facebook's News Landscape</h1>
-      <h5 class="byline">By Peter Andringa</h5>
+      <h5 class="byline">By Peter Andringa &bull; April 25, 2018</h5>
       <article>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Amidst the fallout of the 2016 election and the Cambridge Analytica scandal, perhaps no company is seen viewed as much suspicion and (occasionally) frustration as Facebook. The social platform that started as a dorm-room hack has grown into a massively global corporation that has tentacles into almost all parts of our lives - whether at home, at school, at work or beyond.</p>
+
+        <p>Much of the recent discussion of Facebook involves the news content on the platform, because the Facebook News Feed has increasingly become Americans' primary news consumption tool. A <a href="http://www.journalism.org/2017/09/07/news-use-across-social-media-platforms-2017/">2017 Pew survey</a> found that 67 percent of U.S. adults get news on social media, and for ages 18-49 the figure is 78 percent.</p>
+
+        <p>Clearly, understanding what news people are receiving through News Feed is important for understanding news consumption today. However, Facebook has been less than forthcoming when explaining how the News Feed decides what to show people - only that the algorithm contains hundreds of inputs and changes frequently.</p>
+
+        <p>If one wants to understand the News Feed then, one has to reverse-engineer it to obtain the data to make guesses how it works. For privacy purposes, it's difficult to obtain data about the behaviors of individual users and the content they consume, but it is possible to collect data about the behaviors of news companies on Facebook, which can shed slightly more light into the black box of News Feed.</p>
+
+        <p>Below, I do just that, using data from some of the largest news organizations' Facebook Pages, and an archive of their posts from March and April 2018.</p>
+
+        <h3>The Pages</h3>
+
+        <p>To start, let's compare the different Facebook pages included in the dataset, looking at the characteristics of their different audience interactions. Below, you'll find the average number of reactions, shares, and comments on each post (controlled by the size of their total Facebook audience).</p>
+
+        <!-- Interactive 2: Graphs of engagement by news org, category -->
+        <div class="interactive" id="engagement-graphs">
+        </div>
+
+        <p>You may notice that Breitbart has a far more average engagement than others, across all three metrics - this could be due to their extremely dedicated audience, but it also might simply be because they have a more niche audience than other publications. Since they are an outlier in the data, use the toggle below the graphs to hide their result and focus on others.</p>
+
+        <p>Now, you might notice that NPR and Fox News have some of the highest compared to the others - and anecdotally, each has a very committed (and politically homogenous) audience. This may imply that more polarized news outlets - or at least ones with more polarized audiences - have better engagement than others, but this data isn't conclusive.</p>
+
+        <h3>The Reactions</h3>
+
+        <p>Many of the graphs from this dataset are based on Facebook's "reaction" emoji - icons labeled "like," "love," "wow," "haha," "sad" and "angry" that Facebook users use to respond to content. Different people use the emojis to carry slightly different meaning, but in aggregate some interesting trends emerge.</p>
+
+        <p>Use the tool below to click through and look at posts in our dataset with the greatest number of each reaction. Also notice how some reactions are used similarly to others - some of the posts are the at the top for multiple reactions.</p>
+
 
         <!-- Interactive 1: Top Posts -->
         <div class="interactive" id="top_posts"></div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>The reactions are a useful, if approximate, measure of tone or mood of any given article, since most people use each emoji for broadly similar meanings. This means we can compare the types of reactions different categories of articles, to see which ones receive "love" or most "angry" reactions.</p>
 
-        <!-- Interactive 2: Graphs of engagement by news org, category -->
-        <div class="interactive">
-        </div>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>The graphs below do just that, measuring the total number of reactions for each category of news.</p>
 
         <!-- Interactive 3: Reaction bars -->
         <div class="interactive" id="reaction-bars">
+            <h2>Reactions to of different categories</h2>
             <div id="reaction-selects"></div>
             <div id="bars-container"></div>
         </div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>If you use the picker to select specific news sources, you'll notice that some audiences have a preference for specific types of content. For example, CNN's audience favors "love", while Breitbart's audience favors "haha" by a large margin.</p>
 
+        <h3>Categories of News</h3>
+
+        <p>The categories in this analysis are pulled from the news organizations themselves, so they're an imperfect but reasonably good measure of what a particular piece of news is about. It is important to examine the categories of news distributed on Facebook, to determine how the News Feed might be changing the quantities and types of news Americans consume on a regular basis.</p>
+
+        <p>Below, you'll find the most-posted categories for each page, which serves as some indication of what types of content that website is publishing on a whole.</p>
 
         <!-- Interactive 4: Pie Charts of most-posed categories -->
         
@@ -71,8 +70,9 @@
             <div id="pies-legend"></div>
         </div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>This table is a more detailed view of the same information, showing the category of post that received an interaction (whether that's commenting, sharing, or reacting) most often for that news site. For example, most of ABC News' posts are about national news, but their political coverage receives the most comments and "haha" reactions, while their lifestyle content receives more "heart" reactions.</p>
+
+        <p>If a newsroom is trying to optimize their social media feed to get as much engagement as possible, their entire row should be all the same color - which means their most-posted content is also their most-interacted.</p>
 
         <!-- Interactive 5: Table with most-posted, most-reacted, most-commented categories -->
         <div class="interactive" id="reaction-table">
@@ -80,29 +80,28 @@
             <div id="table-container"></div>
         </div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Out of all of these reactions, the "share" is the most highly coveted by most news organizations, because it gets their content in front of an entirely new audience and acts as an implicit endorsement of their brand. Therefore, each brand should pay close attention to their most-shared types of news, in the second column - and increase their amount of posts in that category if possible.</p>
+
+        <p>To better understand what causes a user to share, the below chart plots the number of reactions against the number of shares. While more reactions generally means more shares, for different types of content the two are related in different ways.</p>
+
+        <p>The regression lines you see on the graph represent posts aggregated by their "top reaction" - that is, the most popular (non-like) emoji given to the post. If you use the picker to select a specific reaction, you can see all the points for that reaction on the scatterplot, which is on a logarithmic scale.</p>
+
+        <p>The top reaction is a somewhat useful measure to get an idea of a post's mood, and it seems to impact the relationship between reactions and sharing. For example, with most pages the "angry" and "wow" reactions have the steepest slope, which means more people are likely to share a post when they feel angry or amazed, instead of just reacting to it.</p>
 
         <!-- Interactive 6: Correlations between reactions and shares -->
         <div class="interactive" id="correlations-graph">
+            <h2>Reactions vs Shares</h2>
             <div id="correlations-select"></div>
             <div id="correlations-container"></div>
         </div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>While this dataset is only a small slice that offers a blurry look into the dynamics of Facebook's algorithm, it is valuable simply because of how powerful a role News Feed plays in most peoples' lives. Further study into how Facebook affects our news consumption will be important to better understand what the nation is thinking, reading, and talking about - and perhaps even offer a measure for the health of our democracy as a whole.</p>
+
+        <div class="methodology">
+            <h2>Methodology</h2>
+            <p>The data in this analysis comes from from Facebook's public Page API, by loading the posts dozens of news pages each day and storing them in a database. The articles shared in each post were then scraped directly from the news organizations' websites, and categorized based on the "section" or "category" provided by the news organization themselves.</p>
+            <p>Other data collected includes the posting time, article keywords, and the total number of times that article appears on Facebook. While those don't appear in this visualization at this moment, if you have an idea using the data please <a href="mailto:peter.andringa@unc.edu">reach out</a> let me know.</p>
+        </div>
       </article>
     </section>
 
@@ -113,6 +112,7 @@
     <script src="js/selectivity.min.js" type="text/javascript"></script>
     <script src="js/constants.js" type="text/javascript"></script>
     <script src="js/elements/ReactionBars.js" type="text/javascript"></script>
+    <script src="js/elements/BarGraph.js" type="text/javascript"></script>
     <script src="js/elements/PieChart.js" type="text/javascript"></script>
     <script src="js/elements/Table.js" type="text/javascript"></script>
     <script src="js/elements/CorrelationGraph.js" type="text/javascript"></script>

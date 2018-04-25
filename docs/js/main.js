@@ -7,15 +7,15 @@ function buildReactionBars(data){
   const category_bars = []
   
   for(var c of CATEGORIES ){
-    const bars = ReactionBars(c, containerWidth)
+    const bars = new ReactionBars(c, containerWidth)
     bars.update( data.filter(d => d.category == c) )
-    container.node().appendChild(bars.svg.node())
+    container.node().appendChild( bars.node() )
     category_bars.push( bars )
   }
 
-  const page_select = Select( PAGES, 'All News Sources', 250 )
+  const page_select = new Select( PAGES, 'All News Sources', 250 )
   
-  page_select.addEventListener('change', e => {
+  page_select.onChange(e => {
     category_bars.forEach(b => {
       const newData = data.filter(d => d.title == b.category && (!e.value || d.page == e.value) )
       b.update( newData )
@@ -23,7 +23,7 @@ function buildReactionBars(data){
   });
 
   d3.select('#reaction-selects').node()
-    .appendChild( page_select )
+    .appendChild( page_select.node() )
 
   return data
 }
@@ -48,9 +48,9 @@ function buildCategoryPies(data){
       value: pie_data[c],
       color: CATEGORY_COLORS[c]
     })).sort((a,b) => d3.descending(a.name, b.name))
-    const pie = PieChart(PAGES[p], containerWidth/7)
+    const pie = new PieChart(PAGES[p], containerWidth/7)
     pie.update( pie_data )
-    container.node().appendChild(pie.svg.node())
+    container.node().appendChild( pie.node() )
   }
 
   const legends = d3.select('#pies-legend')
@@ -105,7 +105,7 @@ function buildCategoryTable(data){
   }
 
   const t_headers = ['post', 'share', 'comment', 'like', 'love', 'wow', 'haha', 'sad', 'angry']
-  const table = Table(table_rows, t_headers)
+  const table = new Table(table_rows, t_headers)
   container.node().appendChild( table.node() )
 
   return data
@@ -120,10 +120,10 @@ function buildCorrelationGraph(data){
   const containerWidth = +container.style('width').slice(0, -2)
   const containerHeight = containerWidth / 1.63
 
-  const graph = CorrelationGraph( containerWidth, containerHeight )
+  const graph = new CorrelationGraph( containerWidth, containerHeight )
   graph.update( data )
 
-  const correlation_select = Select( PAGES, 'All News Sources', 250 )
+  const correlation_select = new Select( PAGES, 'All News Sources', 250 )
   
   const reaction_image_map = graph.reactions.reduce( (obj, r) => {
     obj[r] = `
@@ -133,32 +133,60 @@ function buildCorrelationGraph(data){
     return obj
   }, {})
 
-  const reaction_select = Select( reaction_image_map, 'All Reactions', 150 )
+  const reaction_select = new Select( reaction_image_map, 'All Reactions', 150 )
 
 
   var currentReactionFilter = false;
-  reaction_select.addEventListener('change', e => {
+  reaction_select.onChange(e => {
     currentReactionFilter = e.value || false
     graph.update( currentData, currentReactionFilter )
   });
 
   var currentData = data
-  correlation_select.addEventListener('change', e => {
+  correlation_select.onChange(e => {
     currentData = data.filter(d => !e.value || d.page == e.value )
     graph.update( currentData, currentReactionFilter )
   });
 
   d3.select('#correlations-select').node()
-    .appendChild( correlation_select )
+    .appendChild( correlation_select.node() )
 
   d3.select('#correlations-select').node()
-    .appendChild( reaction_select )
+    .appendChild( reaction_select.node() )
 
-  container.node().appendChild( graph.svg )
+  container.node().appendChild( graph.node() )
 
   return data
 }
 
+/*************************
+/* CREATE BAR Graphs
+**************************/
+function buildBarGraphs(data, page_data){
+  const graph_defs = {
+    'Reactions': d => d.total_count,
+    'Shares': d => d.share_count,
+    'Comments': d => d.comment_count,
+  }
+  const container = d3.select('#engagement-graphs');
+  const containerWidth = +container.style('width').slice(0,-2);
+  
+  var labels = false;
+  for(var [i, title] of Object.keys(graph_defs).entries()){
+    const graph = new BarGraph(data.filter(d => d.page != 'breitbart'), page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0)
+  
+    if(!labels){
+      labels = graph.labels()
+      const label_container = container.append('div').attr('class', 'bargraph-labels')
+      label_container.node().appendChild( labels.node() )
+    }
+
+    const graph_container = container.append('div').attr('class', 'bargraph-container')
+    graph_container.append('h2').text( title )
+    graph_container.node().appendChild( graph.node() )
+  }
+
+}
 
 /*************************
 /* LOAD DATA
@@ -182,6 +210,16 @@ function loadData(){
     })
 }
 
+function loadPages(){
+  return d3.csv("https://mj583.peterandringa.com/api/pages").then(pages => {
+    return pages.reduce( (data, p) => {
+      p.likes = +p.likes
+      data[p.slug] = p
+      return data
+    }, {})
+  });
+}
+
 /*************************
 /* MAIN
 **************************/
@@ -190,6 +228,9 @@ var pymParent = new pym.Parent('top_posts', API_URL+'/interactives/top_posts', {
 
 loadData()
   .then(data => {
+    loadPages()
+      .then(pages => buildBarGraphs(data, pages) )
+
     buildReactionBars(data)
     buildCategoryPies(data)
     buildCategoryTable(data)
