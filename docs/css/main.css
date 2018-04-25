@@ -173,9 +173,10 @@ button:active {
   font-size: 0.8em;
   text-align: right;
   padding-right: 0.5em;
+  transition: background 0.25s;
 }
 #reaction-table tr:not(.header):hover th {
-  font-weight: bold;
+  background: #eee;
 }
 
 
