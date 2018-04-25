@@ -172,9 +172,10 @@ function buildBarGraphs(data, page_data){
   const containerWidth = +container.style('width').slice(0,-2);
   
   var labels = false;
+  var graphs = [];
   for(var [i, title] of Object.keys(graph_defs).entries()){
-    const graph = new BarGraph(data.filter(d => d.page != 'breitbart'), page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0)
-  
+    const graph = new BarGraph(page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0)
+    graph.update(data)
     if(!labels){
       labels = graph.labels()
       const label_container = container.append('div').attr('class', 'bargraph-labels')
@@ -184,8 +185,28 @@ function buildBarGraphs(data, page_data){
     const graph_container = container.append('div').attr('class', 'bargraph-container')
     graph_container.append('h2').text( title )
     graph_container.node().appendChild( graph.node() )
+    graphs.push( graph )
   }
 
+  var outliers = true;
+  d3.select('#button-outlier')
+    .on('click', e => {
+      var dataset = data
+      if(outliers){
+        outliers = false;
+        d3.select('#button-outlier')
+          .text('Show Outlier')
+        dataset = dataset.filter(d => d.page != 'breitbart')
+      }else{
+        outliers = true;
+        d3.select('#button-outlier')
+          .text('Hide Outlier')
+      }
+
+      for(var graph of graphs){
+        graph.update( dataset )
+      }
+    });
 }
 
 /*************************

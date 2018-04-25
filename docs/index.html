@@ -26,7 +26,11 @@
         <p>To start, let's compare the different Facebook pages included in the dataset, looking at the characteristics of their different audience interactions. Below, you'll find the average number of reactions, shares, and comments on each post (controlled by the size of their total Facebook audience).</p>
 
         <!-- Interactive 2: Graphs of engagement by news org, category -->
-        <div class="interactive" id="engagement-graphs">
+        <div class="interactive" id="engagement-graphs-container">
+            <div id="engagement-graphs"></div>
+            <div class="button-container">
+                <button type="button" id="button-outlier">Hide Outlier</button>
+            </div>
         </div>
 
         <p>You may notice that Breitbart has a far more average engagement than others, across all three metrics - this could be due to their extremely dedicated audience, but it also might simply be because they have a more niche audience than other publications. Since they are an outlier in the data, use the toggle below the graphs to hide their result and focus on others.</p>
