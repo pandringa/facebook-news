@@ -11,13 +11,13 @@
       <h1 class="headline">Exploring Facebook's News Landscape</h1>
       <h5 class="byline">By Peter Andringa &bull; April 25, 2018</h5>
       <article>
-        <p>Amidst the fallout of the 2016 election and the Cambridge Analytica scandal, perhaps no company is seen viewed as much suspicion and (occasionally) frustration as Facebook. The social platform that started as a dorm-room hack has grown into a massively global corporation that has tentacles into almost all parts of our lives - whether at home, at school, at work or beyond.</p>
+        <p>Amidst the fallout of the 2016 election and the Cambridge Analytica scandal, perhaps no company is seen with as much suspicion and (occasionally) frustration as Facebook. The social platform that started as a dorm-room hack has grown into a massively global corporation that has tentacles into almost all parts of our lives - whether at home, at school, at work or beyond.</p>
 
-        <p>Much of the recent discussion of Facebook involves the news content on the platform, because the Facebook News Feed has increasingly become Americans' primary news consumption tool. A <a href="http://www.journalism.org/2017/09/07/news-use-across-social-media-platforms-2017/">2017 Pew survey</a> found that 67 percent of U.S. adults get news on social media, and for ages 18-49 the figure is 78 percent.</p>
+        <p>Much of the recent discussion of Facebook involves news content on the platform, because the Facebook News Feed has increasingly become Americans' primary news consumption tool. A <a href="http://www.journalism.org/2017/09/07/news-use-across-social-media-platforms-2017/">2017 Pew survey</a> found that 67 percent of U.S. adults get news on social media, and for ages 18-49 the figure is 78 percent.</p>
 
         <p>Clearly, understanding what news people are receiving through News Feed is important for understanding news consumption today. However, Facebook has been less than forthcoming when explaining how the News Feed decides what to show people - only that the algorithm contains hundreds of inputs and changes frequently.</p>
 
-        <p>If one wants to understand the News Feed then, one has to reverse-engineer it to obtain the data to make guesses how it works. For privacy purposes, it's difficult to obtain data about the behaviors of individual users and the content they consume, but it is possible to collect data about the behaviors of news companies on Facebook, which can shed slightly more light into the black box of News Feed.</p>
+        <p>If one wants to understand the News Feed then, one has to reverse-engineer it to make guesses about how it works. For privacy purposes, it's difficult to obtain data about the behaviors of individual users and the content they consume, but it is possible to collect data about the behaviors of news pages on Facebook, which can shed slightly more light into the black box of News Feed.</p>
 
         <p>Below, I do just that, using data from some of the largest news organizations' Facebook Pages, and an archive of their posts from March and April 2018.</p>
 
@@ -41,13 +41,13 @@
 
         <p>Many of the graphs from this dataset are based on Facebook's "reaction" emoji - icons labeled "like," "love," "wow," "haha," "sad" and "angry" that Facebook users use to respond to content. Different people use the emojis to carry slightly different meaning, but in aggregate some interesting trends emerge.</p>
 
-        <p>Use the tool below to click through and look at posts in our dataset with the greatest number of each reaction. Also notice how some reactions are used similarly to others - some of the posts are the at the top for multiple reactions.</p>
+        <p>Use the tool below to click through and look at posts with the greatest number of each reaction. Also notice how some reactions are used similarly to others - some of the posts are the at the top for multiple reactions.</p>
 
 
         <!-- Interactive 1: Top Posts -->
         <div class="interactive" id="top_posts"></div>
 
-        <p>The reactions are a useful, if approximate, measure of tone or mood of any given article, since most people use each emoji for broadly similar meanings. This means we can compare the types of reactions different categories of articles, to see which ones receive "love" or most "angry" reactions.</p>
+        <p>The reactions are a useful, if approximate, measure of the mood of any given article, since most people use each emoji for broadly similar meanings. This means we can compare the types of reactions between different categories of articles, to see which ones receive more "love" or more "angry" reactions, for example.</p>
 
         <p>The graphs below do just that, measuring the total number of reactions for each category of news.</p>
 
@@ -62,7 +62,7 @@
 
         <h3>Categories of News</h3>
 
-        <p>The categories in this analysis are pulled from the news organizations themselves, so they're an imperfect but reasonably good measure of what a particular piece of news is about. It is important to examine the categories of news distributed on Facebook, to determine how the News Feed might be changing the quantities and types of news Americans consume on a regular basis.</p>
+        <p>The categories in this analysis are pulled from the news organizations themselves, so they're an imperfect but reasonably good measure of what a particular piece of news is about. It's important to examine the categories of news distributed on Facebook, to determine how the News Feed might be changing the types of news Americans consume on a regular basis.</p>
 
         <p>Below, you'll find the most-posted categories for each page, which serves as some indication of what types of content that website is publishing on a whole.</p>
 
@@ -74,9 +74,9 @@
             <div id="pies-legend"></div>
         </div>
 
-        <p>This table is a more detailed view of the same information, showing the category of post that received an interaction (whether that's commenting, sharing, or reacting) most often for that news site. For example, most of ABC News' posts are about national news, but their political coverage receives the most comments and "haha" reactions, while their lifestyle content receives more "heart" reactions.</p>
+        <p>The table below is a more detailed view of the same information, showing the category of post that received an interaction (whether that's commenting, sharing, or reacting) most often for that news site. For example, most of ABC News' posts are about national news, but their political coverage receives the most comments and "haha" reactions, while their lifestyle content receives more "heart" reactions.</p>
 
-        <p>If a newsroom is trying to optimize their social media feed to get as much engagement as possible, their entire row should be all the same color - which means their most-posted content is also their most-interacted.</p>
+        <p>If a newsroom is trying to optimize their social media feed to get as much engagement as possible, their entire row should be mostly the same color - which means their most-posted content is also their most-interacted.</p>
 
         <!-- Interactive 5: Table with most-posted, most-reacted, most-commented categories -->
         <div class="interactive" id="reaction-table">
@@ -84,13 +84,13 @@
             <div id="table-container"></div>
         </div>
 
-        <p>Out of all of these reactions, the "share" is the most highly coveted by most news organizations, because it gets their content in front of an entirely new audience and acts as an implicit endorsement of their brand. Therefore, each brand should pay close attention to their most-shared types of news, in the second column - and increase their amount of posts in that category if possible.</p>
+        <p>Out of all of these reactions, the "share" is the most highly coveted by most pages, because it promotes their content to an entirely new audience and acts as an implicit endorsement of their brand. Therefore, each brand should pay close attention to their most-shared types of news (the second column) - and increase the amount of posts in that category if possible.</p>
 
-        <p>To better understand what causes a user to share, the below chart plots the number of reactions against the number of shares. While more reactions generally means more shares, for different types of content the two are related in different ways.</p>
+        <p>To better understand what causes a user to share, the below chart plots the number of reactions against the number of shares. While more reactions generally means more shares, for different types of content the two are related in different proportions.</p>
 
-        <p>The regression lines you see on the graph represent posts aggregated by their "top reaction" - that is, the most popular (non-like) emoji given to the post. If you use the picker to select a specific reaction, you can see all the points for that reaction on the scatterplot, which is on a logarithmic scale.</p>
+        <p>The regression lines you see on the graph represent posts aggregated by their "top reaction" - that is, the most popular (non-like) emoji given to the post. If you use the picker to select a specific reaction, you can see all the points for that reaction on the scatterplot, which uses a logarithmic scale.</p>
 
-        <p>The top reaction is a somewhat useful measure to get an idea of a post's mood, and it seems to impact the relationship between reactions and sharing. For example, with most pages the "angry" and "wow" reactions have the steepest slope, which means more people are likely to share a post when they feel angry or amazed, instead of just reacting to it.</p>
+        <p>The top reaction is a somewhat useful measure to get an idea of a post's mood, and it seems to impact the relationship between reactions and sharing. For most pages the "angry" and "wow" reactions have the steepest slope, which means more people are likely to share a post when they feel angry or amazed, instead of just reacting to it. On the other hand, the "love" emoji usually has the lowest slope, which implies that people are more likely to "love" a post but not share it.</p>
 
         <!-- Interactive 6: Correlations between reactions and shares -->
         <div class="interactive" id="correlations-graph">
@@ -99,13 +99,13 @@
             <div id="correlations-container"></div>
         </div>
 
-        <p>While this dataset is only a small slice that offers a blurry look into the dynamics of Facebook's algorithm, it is valuable simply because of how powerful a role News Feed plays in most peoples' lives. Further study into how Facebook affects our news consumption will be important to better understand what the nation is thinking, reading, and talking about - and perhaps even offer a measure for the health of our democracy as a whole.</p>
+        <p>While this dataset is only a small slice that offers a fuzzy look into the dynamics of Facebook's algorithm, it is valuable simply because of how powerful a role News Feed plays in most people's lives. Further study into how Facebook affects our news consumption will be important to better understand what the nation is thinking, reading, and talking about - and perhaps even offer a measure for the health of our news consumption as a whole.</p>
 
         <div class="methodology">
             <h2>Methodology</h2>
             <p>The data in this analysis comes from from Facebook's public Page API, by loading the posts dozens of news pages each day and storing them in a database. The articles shared in each post were then scraped directly from the metadata tags on the news organizations' websites, and categorized based on the "section" or "category" provided by the news organization themselves.</p>
-            <p>Other data collected includes the posting time, article keywords, and the total number of times that article appears on Facebook. While those don't appear in this visualization at this moment, if you have an idea using the data please <a href="mailto:peter.andringa@unc.edu">reach out</a> let me know.</p>
-            <p class="tiny">Sources: Edit icon from mikicon, share from IconMaster, and comment from Popular, all on the NounProject.</p>
+            <p>Other data collected includes the posting time, article keywords, and the total number of times that article appears on Facebook. While those don't appear in this visualization at this moment, if you have an idea using that data please <a href="mailto:peter.andringa@unc.edu">reach out</a> let me know and I'm happy to share the data.</p>
+            <p class="tiny">Icon Credits: Edit icon from mikicon, share icon from IconMaster, and comment icon from Popular, all on the NounProject.</p>
         </div>
       </article>
     </section>
