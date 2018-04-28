@@ -168,6 +168,7 @@ function buildBarGraphs(data, page_data){
     'Shares': d => d.share_count,
     'Comments': d => d.comment_count,
   }
+
   const container = d3.select('#engagement-graphs');
   const containerWidth = +container.style('width').slice(0,-2);
   
@@ -177,8 +178,8 @@ function buildBarGraphs(data, page_data){
     const graph = new BarGraph(page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0)
     graph.update(data)
     if(!labels){
-      labels = graph.labels()
       const label_container = container.append('div').attr('class', 'bargraph-labels')
+      labels = graph.labels( +label_container.style('width').slice(0,-2) )
       label_container.node().appendChild( labels.node() )
     }
 
@@ -245,6 +246,8 @@ function loadPages(){
 /*************************
 /* MAIN
 **************************/
+window.IS_MOBILE = window.innerWidth < 768
+console.log('MOBILE', IS_MOBILE)
 const API_URL = 'https://mj583.peterandringa.com'
 var pymParent = new pym.Parent('top_posts', API_URL+'/interactives/top_posts', {});
 

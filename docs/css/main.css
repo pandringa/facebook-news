@@ -59,6 +59,9 @@ button:hover {
 button:active {
   background:#ccc;
 }
+p.tiny{
+  font-size: 0.6rem;
+}
 
 .interactive {
   font-family: "Montserrat";
@@ -92,8 +95,7 @@ button:active {
 }
 #engagement-graphs .bargraph-labels{
   display: inline-block;
-  flex: 0;
-  width: 150px;
+  flex: 0 0 150px;
   vertical-align: bottom;
   align-self: flex-end;
 }
@@ -101,7 +103,7 @@ button:active {
   flex: 1;
   display: inline-block;
 }
-#engagement-graphs h3 {
+#engagement-graphs h2 {
   text-align: center;
   margin-bottom: 0;
 }
@@ -186,4 +188,17 @@ button:active {
 }
 #correlations-select .dropdown {
   display: inline-block;
+}
+
+@media only screen and (max-width: 768px) {
+    .interactive {
+      margin: 1em 0;
+    }
+    #engagement-graphs .bargraph-labels {
+      font-size: 0.7rem;
+      flex-basis: 110px;
+    }
+    #engagement-graphs h2 {
+      font-size: 1rem;
+    }
 }

@@ -90,3 +90,25 @@ li.tab:hover i {
   height: 1em;
   transform: translateY(0.1em);
 }
+
+@media only screen and (max-width: 768px) {
+  ul.tabs {
+    flex-direction: row;
+    min-height: 0px;
+    height: auto;
+    min-width: 100%;
+  }
+  li.tab {
+    flex-direction: column;
+  }
+  li.tab i {
+    margin-left: 0;
+  }
+  li.tab:hover i {
+    transform: translateY(0.25em);
+  }
+  li.tab i:before {
+    content: "\f107" !important;
+  }
+}
+  

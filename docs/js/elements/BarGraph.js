@@ -17,11 +17,12 @@ class BarGraph{
   constructor(page_data, get_value, container_width, show_labels){
     const text_height = 20
     this.width = container_width
-    this.height = container_width * 1.63
-    this.margin = {top: 20, left: 20, right: 20, bottom: 20}
+    this.height = IS_MOBILE ? window.innerHeight / 2 : container_width * 1.63;
+    this.margin = IS_MOBILE 
+      ? {top: 0, left: 0, right: 0, bottom: 10}
+      : {top: 10, left: 20, right: 20, bottom: 10}
     this.get_value = get_value
     this.page_data = page_data
-    // if(show_labels) margin.left = 140;
 
     const svgDom = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svgDom.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
@@ -38,8 +39,10 @@ class BarGraph{
 
   update(data){
     const avgs = this._compute_avg(data, this.get_value, d => d.page)
-    const dataset = Object.keys(avgs).filter(k => k.indexOf('_') == -1)
+    const dataset = Object.keys(avgs)
+      .filter(k => k.indexOf('_') == -1)
       .map(p => ({ name: this.page_data[p].name, value: avgs[p]/this.page_data[p].likes }))
+      .sort((a,b) => d3.ascending(a.name, b.name))
 
     const bar_x = d3.scaleLinear()
       .domain([0, d3.max(dataset, d => d.value)]).nice()
@@ -102,16 +105,17 @@ class BarGraph{
       .call(bar_yAxis);
   }
 
-  labels(){
+  labels(width){
+    const label_width = width || 150
     const svgDom = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svgDom.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
     const labelSvg = d3.select(svgDom)
-      .attr('width', 150)
+      .attr('width', label_width)
       .attr('height', this.height)
-      .attr('viewBox', '0,0,150,'+this.height)
+      .attr('viewBox', '0,0,'+label_width+','+this.height)
 
     labelSvg.append('g')
-      .style('transform', 'translateX(150px)')
+      .style('transform', 'translateX('+label_width+'px)')
       .call(this.label_axis)
 
     return labelSvg
