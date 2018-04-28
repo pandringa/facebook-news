@@ -10,8 +10,6 @@ from .sql_query import all_posts_query, march_april_query, stream_csv
 # Exclude MSNBC, CNBC, BBC News, Buzzfeed, The Guardian
 EXCLUDE_PAGES = ['273864989376427', '97212224368', '228735667216', '21898300328', '10513336322']
 
-
-
 class CsvResponse(HttpResponse):
   def __init__(self, cls, data, fields=None):
     super(CsvResponse, self).__init__(content_type='text/csv')
@@ -71,13 +69,6 @@ def get_all_posts(request):
     stream_csv(columns, cursor), 
     content_type='text/csv'
   )
-
-  # return HttpResponse(
-  #   ",".join(columns) + "\n" + "\n".join([
-  #     ",".join([str(r) for r in row])
-  #   for row in cursor.fetchall()]),
-  #   content_type='text/csv'
-  # )
     
 # GET interactives/top_posts
 def top_posts(request):
@@ -86,12 +77,14 @@ def top_posts(request):
   for r in reactions:
     val = Post.objects.aggregate(Max(r+'_count'))[r+'_count__max']
     posts.append( Post.objects.get(**{r+'_count': val}) )
+  
   context = {
     'main_domain': 'https://peterandringa.com/facebook-news',
     'reactions': reactions,
     'posts': zip(reactions, posts),
     'width': int(request.GET.get('initialWidth') or 750) - 100
   }
+
   response = render(request, "top_posts.html", context)
   response['X-Frame-Options'] = 'ALLOW-FROM https://peterandringa.com/'
   return response
