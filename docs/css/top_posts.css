@@ -101,6 +101,9 @@ li.tab:hover i {
   li.tab {
     flex-direction: column;
   }
+  li.tab:first-of-type {
+    border-top: none;
+  }
   li.tab i {
     margin-left: 0;
   }

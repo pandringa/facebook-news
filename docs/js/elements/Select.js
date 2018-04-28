@@ -32,7 +32,8 @@ class Select{
     // Image
     this.element = document.createElement('div')
     this.element.setAttribute('class', 'dropdown')
-    this.element.setAttribute('style', 'width: '+width+'px')
+    if(width)
+      this.element.setAttribute('style', 'width: '+width+'px')
 
     if(typeof choices == 'object'){
       choices = Object.keys(choices).map(k => ({

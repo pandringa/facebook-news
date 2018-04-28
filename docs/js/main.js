@@ -34,7 +34,8 @@ function buildReactionBars(data){
 function buildCategoryPies(data){
   const container = d3.select('#pies-container')
   const containerWidth = +container.style('width').slice(0, -2)
-  
+  const per_row = IS_MOBILE ? 3 : 7
+
   for(var p of Object.keys(PAGES).sort( (a,b) => d3.ascending(a, b) ) ){
     var pie_data = data.filter(d => d.page == p)
     .reduce( (obj, d) => {
@@ -48,7 +49,7 @@ function buildCategoryPies(data){
       value: pie_data[c],
       color: CATEGORY_COLORS[c]
     })).sort((a,b) => d3.descending(a.name, b.name))
-    const pie = new PieChart(PAGES[p], containerWidth/7)
+    const pie = new PieChart(PAGES[p], containerWidth / per_row)
     pie.update( pie_data )
     container.node().appendChild( pie.node() )
   }
@@ -123,7 +124,7 @@ function buildCorrelationGraph(data){
   const graph = new CorrelationGraph( containerWidth, containerHeight )
   graph.update( data )
 
-  const correlation_select = new Select( PAGES, 'All News Sources', 250 )
+  const correlation_select = new Select( PAGES, 'All News Sources', IS_MOBILE ? 200 : 250 )
   
   const reaction_image_map = graph.reactions.reduce( (obj, r) => {
     obj[r] = `

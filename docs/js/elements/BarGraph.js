@@ -19,7 +19,7 @@ class BarGraph{
     this.width = container_width
     this.height = IS_MOBILE ? window.innerHeight / 2 : container_width * 1.63;
     this.margin = IS_MOBILE 
-      ? {top: 0, left: 0, right: 0, bottom: 10}
+      ? {top: 0, left: 5, right: 0, bottom: 10}
       : {top: 10, left: 20, right: 20, bottom: 10}
     this.get_value = get_value
     this.page_data = page_data

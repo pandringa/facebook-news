@@ -2,7 +2,8 @@ class ReactionBars {
   constructor(title, container_width){
     this.height = 100
     this.text_width = 84
-    this.width = (container_width / 4.0) - 20
+    const per_row = IS_MOBILE ? 2.0 : 4.0
+    this.width = (container_width / per_row) - 20
     this.title = title
 
     const svgDom = document.createElementNS("http://www.w3.org/2000/svg", "svg")

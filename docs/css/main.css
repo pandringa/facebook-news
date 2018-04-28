@@ -71,6 +71,9 @@ p.tiny{
 .interactive iframe {
   min-height: 400px;
 }
+.interactive > h2 {
+  margin-bottom: 0;
+}
 
 #reaction-bars .barset {
   display: inline-block;
@@ -200,5 +203,17 @@ p.tiny{
     }
     #engagement-graphs h2 {
       font-size: 1rem;
+    }
+    #reaction-selects {
+      margin-bottom: 15px;
+    }
+    #reaction-table table {
+      font-size: 0.4em;
+    }
+    g.correlations {
+      display: none;
+    }
+    #correlations-select .dropdown {
+      font-size: 0.9em;
     }
 }
