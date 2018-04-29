@@ -147,47 +147,47 @@ class CorrelationGraph {
         .style("opacity", 0)
         .remove()
 
-    const info_group = this.correlation_box.selectAll('g')
-      .data( reaction_lines, d => d.reaction )
+    // const info_group = this.correlation_box.selectAll('g')
+    //   .data( reaction_lines, d => d.reaction )
 
-    info_group.select('text')
-      .transition()
-        .attr('y', (d,i) => i*20 + this.margin.top + 18)
-        .text(d => d.reg.r2)
+    // info_group.select('text')
+    //   .transition()
+    //     .attr('y', (d,i) => i*20 + this.margin.top + 18)
+    //     .text(d => d.reg.r2)
 
-    info_group.select('image')
-      .transition()
-        .attr('y', (d,i) => i*20 + this.margin.top + 6)
+    // info_group.select('image')
+    //   .transition()
+    //     .attr('y', (d,i) => i*20 + this.margin.top + 6)
 
-    info_group.exit()
-      .transition()
-        .style('opacity', 0)
-        .remove()
+    // info_group.exit()
+    //   .transition()
+    //     .style('opacity', 0)
+    //     .remove()
 
-    const new_info = info_group.enter()
-      .append('g')
-      .style('opacity', 0)
+    // const new_info = info_group.enter()
+    //   .append('g')
+    //   .style('opacity', 0)
 
-    new_info
-      .append("image")
-      .attr('x', 80 + this.margin.left)
-      .attr('y', (d,i) => i*20 + this.margin.top + 6)
-      .attr('width', 12)
-      .attr('height', 12)
-      .attr("xlink:href",d => "https://peterandringa.com/facebook-news/img/reactions/"+d.reaction+".png")
+    // new_info
+    //   .append("image")
+    //   .attr('x', 80 + this.margin.left)
+    //   .attr('y', (d,i) => i*20 + this.margin.top + 6)
+    //   .attr('width', 12)
+    //   .attr('height', 12)
+    //   .attr("xlink:href",d => "https://peterandringa.com/facebook-news/img/reactions/"+d.reaction+".png")
 
-    new_info
-      .append("text")
-      .attr('x', 95 + this.margin.left)
-      .attr('y', (d,i) => i*20 + this.margin.top + 18)
-      .attr('width', 50)
-      .attr('height', 15)
-      .attr('font-weight', 'normal')
-      .text(d => d.reg.r2)
+    // new_info
+    //   .append("text")
+    //   .attr('x', 95 + this.margin.left)
+    //   .attr('y', (d,i) => i*20 + this.margin.top + 18)
+    //   .attr('width', 50)
+    //   .attr('height', 15)
+    //   .attr('font-weight', 'normal')
+    //   .text(d => d.reg.r2)
 
-    new_info
-      .transition()
-        .style('opacity', 1)
+    // new_info
+    //   .transition()
+    //     .style('opacity', 1)
 
     const dot_data = reaction_filter ? reactions_grouped[0] : [];
     
