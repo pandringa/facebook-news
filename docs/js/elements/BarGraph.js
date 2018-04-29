@@ -14,7 +14,7 @@ class BarGraph{
       return avgs
     }, {})
   }
-  constructor(page_data, get_value, container_width, show_labels){
+  constructor(page_data, get_value, container_width, show_labels, sortOrder){
     const text_height = 20
     this.width = container_width
     this.height = IS_MOBILE ? window.innerHeight / 2 : container_width * 1.63;
@@ -35,14 +35,28 @@ class BarGraph{
 
     this.bar_group = this.svg.append("g")
       .attr("fill", "steelblue")
+
+    if(sortOrder){
+      this.sortOrder = sortOrder
+    }
   }
 
   update(data){
     const avgs = this._compute_avg(data, this.get_value, d => d.page)
-    const dataset = Object.keys(avgs)
-      .filter(k => k.indexOf('_') == -1)
-      .map(p => ({ name: this.page_data[p].name, value: avgs[p]/this.page_data[p].likes }))
-      .sort((a,b) => d3.ascending(a.name, b.name))
+    
+    var slugs = Object.keys(avgs).filter(k => k.indexOf('_') == -1)
+    if(this.sortOrder && typeof this.sortOrder == 'object' && this.sortOrder.length == slugs.length){
+      slugs = this.sortOrder;
+    }
+    
+    const dataset = slugs
+      .map(p => ({ name: this.page_data[p].name, value: avgs[p]/this.page_data[p].likes, slug: p }))
+
+    if(!this.sortOrder){
+      this.sortOrder = dataset
+        .sort( (a,b) => d3.ascending(a.value, b.value))
+        .map(d => d.slug)
+    }
 
     const bar_x = d3.scaleLinear()
       .domain([0, d3.max(dataset, d => d.value)]).nice()
@@ -123,5 +137,9 @@ class BarGraph{
 
   node(){
     return this.svg.node()
+  }
+
+  sortedOrder(){
+    return this.sortOrder
   }
 }

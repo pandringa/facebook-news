@@ -161,7 +161,7 @@ function buildCorrelationGraph(data){
 }
 
 /*************************
-/* CREATE BAR Graphs
+/* BAR GRAPHS
 **************************/
 function buildBarGraphs(data, page_data){
   const graph_defs = {
@@ -175,8 +175,9 @@ function buildBarGraphs(data, page_data){
   
   var labels = false;
   var graphs = [];
+  var sortOrder = false;
   for(var [i, title] of Object.keys(graph_defs).entries()){
-    const graph = new BarGraph(page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0)
+    const graph = new BarGraph(page_data, graph_defs[title], (containerWidth-150) / Object.keys(graph_defs).length, i==0, sortOrder)
     graph.update(data)
     if(!labels){
       const label_container = container.append('div').attr('class', 'bargraph-labels')
@@ -188,6 +189,9 @@ function buildBarGraphs(data, page_data){
     graph_container.append('h2').text( title )
     graph_container.node().appendChild( graph.node() )
     graphs.push( graph )
+    if(i == 0){
+      sortOrder = graph.sortedOrder()
+    }
   }
 
   var outliers = true;
