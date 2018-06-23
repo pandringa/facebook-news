@@ -219,7 +219,7 @@ function buildBarGraphs(data, page_data){
 /* LOAD DATA
 **************************/
 function loadData(){
-  return d3.csv("https://mj583.peterandringa.com/api/posts/all")
+  return d3.csv("data/allposts.csv")
     .then(data => {
       console.log(`Loaded ${data.length} rows of CSV`)
       return data.map(d => {
@@ -239,7 +239,7 @@ function loadData(){
 }
 
 function loadPages(){
-  return d3.csv("https://mj583.peterandringa.com/api/pages").then(pages => {
+  return d3.csv("data/pages.csv").then(pages => {
     return pages.reduce( (data, p) => {
       p.likes = +p.likes
       data[p.slug] = p
@@ -254,7 +254,7 @@ function loadPages(){
 window.IS_MOBILE = window.innerWidth < 768
 console.log('MOBILE', IS_MOBILE)
 const API_URL = 'https://mj583.peterandringa.com'
-var pymParent = new pym.Parent('top_posts', API_URL+'/interactives/top_posts', {});
+// var pymParent = new pym.Parent('top_posts', API_URL+'/interactives/top_posts', {});
 
 loadData()
   .then(data => {
