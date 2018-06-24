@@ -51,19 +51,39 @@ class Command(BaseCommand):
 
   def add_arguments(self, parser):
     parser.add_argument('pages', metavar='slug', type=str, nargs='*', help='a page slug to be loaded')
+    parser.add_argument('--chunk', nargs=1, type=int, help='Chunk number (out of 24)')
 
   def handle(self, *args, **options):
     posts = Post.objects.all()
+    count = Post.objects.count()
     if options['pages']:
       pages = Page.objects.filter(slug__in=options['pages']).values('id')
       posts = posts.filter(page_id__in=pages)
-
-    print('\n[%s] Refreshing stats for %s posts...' % (datetime.now(), len(posts)))
-
-    batched_array = split_chunks(list(posts), 50)
-    batched_dicts = [{post.id: post for post in arr} for arr in batched_array]
-
+    
+    if options['chunk']:
+      start = int( options['chunk'][0] * count / 24.0 )
+      end = int( (options['chunk'][0]+1) * count / 24.0 )
+      print('Loading stats for posts %s to %s...' % (start, end))
+      posts = posts[ start : end ]
+    
+    count = posts.count()
+    pointer = 0
+    batch_size = 5000
     loop = asyncio.get_event_loop()
-    tasks = [refresh_stats(by_id) for by_id in batched_dicts]
-    loop.run_until_complete(asyncio.gather(*tasks))
+
+    while pointer < count:
+      
+      posts_part = posts[pointer : (pointer + batch_size)]
+      print('\n[%s] Refreshing stats for %s posts...' % (datetime.now(), len(posts_part)))
+
+      batched_array = split_chunks(list(posts_part), 50)
+      batched_dicts = [{post.id: post for post in arr} for arr in batched_array]
+      
+      tasks = [refresh_stats(by_id) for by_id in batched_dicts]
+
+      pointer += batch_size
+
+      loop.run_until_complete(asyncio.gather(*tasks))
+      
+      
     loop.close()
