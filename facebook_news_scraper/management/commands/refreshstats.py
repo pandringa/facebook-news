@@ -63,7 +63,7 @@ class Command(BaseCommand):
     if options['chunk']:
       start = int( options['chunk'][0] * count / 24.0 )
       end = int( (options['chunk'][0]+1) * count / 24.0 )
-      print('Loading stats for posts %s to %s...' % (start, end))
+      print('Loading stats chunk %s (for posts %s to %s):' % (options['chunk'][0], start, end))
       posts = posts[ start : end ]
     
     count = posts.count()
