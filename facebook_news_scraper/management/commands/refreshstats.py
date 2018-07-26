@@ -54,7 +54,7 @@ class Command(BaseCommand):
     parser.add_argument('--chunk', nargs=1, type=int, help='Chunk number (out of 24)')
 
   def handle(self, *args, **options):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('id')
     count = Post.objects.count()
     if options['pages']:
       pages = Page.objects.filter(slug__in=options['pages']).values('id')
